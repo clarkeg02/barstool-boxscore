@@ -1,0 +1,152 @@
+body {
+    font-family: 'League Spartan', sans-serif;
+}
+
+.boxscore {
+    border: 1px solid #c4c4c4;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.boxscore__team {
+    display: flex;
+    align-items: center;
+}
+
+.boxscore__team.boxscore__team--header {
+
+}
+
+.boxscore__team.boxscore__team--away {
+
+}
+
+.boxscore__team.boxscore__team--home {
+
+}
+
+.boxscore__team label {
+    width: 60px;
+    flex-shrink: 0;
+    text-align: center;
+    margin: 0;
+    border: 0.5px solid #c4c4c4;
+    border-left: none;
+    background-color: #f9f9fb;
+    padding: 0.5rem
+}
+
+.boxscore__team.boxscore__team--header label {
+    border-top: none;
+}
+
+.boxscore__team.boxscore__team--home label {
+    border-bottom: none;
+}
+
+.boxscore__team__units {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.boxscore__team__units span {
+    width: 100%;
+    text-align: center;
+    border: 0.5px solid #c4c4c4;
+    padding: 0.5rem
+}
+
+.boxscore__team.boxscore__team--header .boxscore__team__units span {
+    border-top: none;
+    background-color: #f9f9fb;
+}
+
+.boxscore__team.boxscore__team--home .boxscore__team__units span {
+    border-bottom: none;
+}
+
+.boxscore__team__results {
+    display: flex;
+    align-items: center;
+    width: 120px;
+    flex-shrink: 0;
+}
+
+.boxscore__team__results span {
+    width: 100%;
+    text-align: center;
+    border: 0.5px solid #c4c4c4;
+    background-color: #f9f9fb;
+    padding: 0.5rem
+}
+
+.boxscore__team.boxscore__team--header .boxscore__team__results span {
+    border-top: none;
+}
+
+.boxscore__team.boxscore__team--home .boxscore__team__results span {
+    border-bottom: none;
+}
+
+.boxscore__team__results span:last-child {
+    border-right: none;
+}
+
+.boxscore__details {
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid #c4c4c4;
+}
+
+.boxscore__details__team {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(50% - 50px);
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    padding: 1rem;
+    overflow: hidden;
+}
+
+.boxscore__details__team.boxscore__details__team--away {
+    border-right: 1px solid #c4c4c4;
+}
+
+.boxscore__details__team.boxscore__details__team--home {
+    border-left: 1px solid #c4c4c4;
+}
+
+.boxscore__details__team p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+}
+
+.boxscore__details__team p strong {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+}
+
+@media (max-width: 576px) { 
+    .boxscore__details__team p strong {
+        font-size: 1rem;
+        line-height: 1rem;
+    }
+}
+
+.boxscore__details__team p small {
+    margin: 0 0.5rem;
+}
+
+.boxscore__details__info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    flex-shrink: 0;
+}
