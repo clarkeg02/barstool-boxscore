@@ -55,7 +55,7 @@ body {
     width: 100%;
     text-align: center;
     border: 0.5px solid #c4c4c4;
-    padding: 0.5rem
+    padding: 0.5rem 0
 }
 
 .boxscore__team.boxscore__team--header .boxscore__team__units span {
