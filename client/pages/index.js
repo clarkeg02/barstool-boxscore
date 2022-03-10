@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getBoxScore } from 'redux/actions/boxScoreActions';
 import NBABoxScore from 'components/nbaboxscore';
 import MLBBoxScore from 'components/mlbboxscore';
+import { SET_MLB_BOXSCORE, SET_NBA_BOXSCORE } from 'redux/types';
 
 const stylesheets = [
   <link key="boostrap" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossOrigin="anonymous" />,
@@ -14,10 +15,17 @@ const stylesheets = [
 const scripts = []
 const REFRESH_RATE = 7500
 
-export async function getServerSideProps({ req }) {
-  const response = await axios.get(`${process.env.API_BASE_URL}/meta/index`);
+export async function getStaticProps() {
+  const metaResponse = await axios.get(`${process.env.API_BASE_URL}/meta/index`);
+  const nbaResponse = await axios.get(`${process.env.API_BASE_URL}/boxscore/nba/latest`);
+  const mlbResponse = await axios.get(`${process.env.API_BASE_URL}/boxscore/mlb/latest`);
   return {
-    props: response.data ? response.data : {}
+    props: {
+      page: metaResponse.data,
+      nba: nbaResponse.data,
+      mlb: mlbResponse.data
+    },
+    revalidate: 15
   }
 }
 
@@ -29,33 +37,20 @@ export default function Home(props) {
   const [mlbInterval, setMlbInterval] = useState(null)
   const dispatch = useDispatch()
 
-  useEffect(async () => {
-    dispatch(getBoxScore('NBA', 'latest', {refresh: REFRESH_RATE}))
-    dispatch(getBoxScore('MLB', 'latest', {refresh: REFRESH_RATE}))
-  }, [])
-
-  useEffect(async () => {
-    if (nba._id) {
-      if (nbaInterval) {
-        clearInterval(nbaInterval)
-      }
-      setNbaInterval(setInterval(() => {
-        dispatch(getBoxScore('NBA', nba._id, {refresh: REFRESH_RATE}))
-      }, REFRESH_RATE))
-    }
-    if (mlb._id) {
-      if (mlbInterval) {
-        clearInterval(nbaInterval)
-      }
-      setMlbInterval(setInterval(() => {
-        dispatch(getBoxScore('MLB', mlb._id, {refresh: REFRESH_RATE}))
-      }, REFRESH_RATE))
-    }
+  useEffect(() => {
+    dispatch({type: SET_NBA_BOXSCORE, payload: props.nba})
+    dispatch({type: SET_MLB_BOXSCORE, payload: props.mlb})
+    setNbaInterval(setInterval(() => {
+      dispatch(getBoxScore('NBA', props.nba._id, {refresh: REFRESH_RATE}))
+    }, REFRESH_RATE))
+    setMlbInterval(setInterval(() => {
+      dispatch(getBoxScore('MLB', props.mlb._id, {refresh: REFRESH_RATE}))
+    }, REFRESH_RATE))
     return () => {
       clearInterval(nbaInterval)
       clearInterval(mlbInterval)
     }
-  }, [nba._id, mlb._id])
+  }, [])
 
   return (
     <PageContext.Provider value={props}>

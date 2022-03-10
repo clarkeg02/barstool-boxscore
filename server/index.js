@@ -25,9 +25,7 @@ mongoose.connect(MONGO_DB_URL, { useNewUrlParser: true }, async () => {
 
     app.get('/meta/index', (req, res) => {
         console.log('GET /meta/index')
-        res.json({
-            page: PAGE_META
-        })
+        res.json(PAGE_META)
     })
 
     app.get('/boxscore/:league/:id', async ({ params, query }, res) => {
