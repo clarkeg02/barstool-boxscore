@@ -56,18 +56,22 @@ export default function Home(props) {
     <PageContext.Provider value={props}>
       <Layout stylesheets={stylesheets} scripts={scripts}>
         <div className="container py-md-5 py-4">
-          <h1>NBA - Box Scores</h1>
-          <h2>{ nba.away_team.full_name } ({ nba.away_totals.points }) vs. { nba.home_team.full_name } ({ nba.home_totals.points })</h2>
-          <p>{ nba.event_information.site.name } - { nba.event_information.site.city }, { nba.event_information.site.state }</p>
           {Object.keys(nba).length > 0 &&
-            <NBABoxScore data={ nba } />
+            <div>
+              <h1>NBA - Box Scores</h1>
+              <h2>{ nba.away_team.full_name } ({ nba.away_totals.points }) vs. { nba.home_team.full_name } ({ nba.home_totals.points })</h2>
+              <p>{ nba.event_information.site.name } - { nba.event_information.site.city }, { nba.event_information.site.state }</p>
+                <NBABoxScore data={ nba } />
+            </div>
           }
           <br />
-          <h1>MLB - Box Scores</h1>
-          <h2>{ mlb.away_team.full_name } ({ mlb.away_batter_totals.runs }) vs. { mlb.home_team.full_name } ({ mlb.home_batter_totals.runs })</h2>
-          <p>{ mlb.event_information.site.name } - { mlb.event_information.site.city }, { mlb.event_information.site.state }</p>
           {Object.keys(mlb).length > 0 &&
-            <MLBBoxScore data={ mlb } />
+            <div>
+              <h1>MLB - Box Scores</h1>
+              <h2>{ mlb.away_team.full_name } ({ mlb.away_batter_totals.runs }) vs. { mlb.home_team.full_name } ({ mlb.home_batter_totals.runs })</h2>
+              <p>{ mlb.event_information.site.name } - { mlb.event_information.site.city }, { mlb.event_information.site.state }</p>
+              <MLBBoxScore data={ mlb } />
+            </div>
           }
         </div>
       </Layout>
